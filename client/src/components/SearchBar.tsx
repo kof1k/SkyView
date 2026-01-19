@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, MapPin, X, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import type { GeocodingResult } from "@shared/schema";
 
@@ -99,10 +98,9 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
           data-testid="input-search-city"
         />
         {query && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted-foreground/10 transition-colors"
             onClick={clearSearch}
             data-testid="button-clear-search"
           >
@@ -111,7 +109,7 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
             ) : (
               <X className="h-4 w-4" />
             )}
-          </Button>
+          </button>
         )}
       </div>
 
