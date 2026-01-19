@@ -79,20 +79,20 @@ export function ForecastSkeleton() {
 
 export function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-      <div className="relative mb-6">
-        <div className="absolute -inset-4 bg-primary/10 rounded-full blur-xl" />
-        <div className="relative p-6 rounded-full bg-muted">
-          <Cloud className="w-12 h-12 text-primary" />
+    <div className="flex flex-col items-center justify-center py-10 sm:py-16 px-4 text-center">
+      <div className="relative mb-4 sm:mb-6">
+        <div className="absolute -inset-3 sm:-inset-4 bg-primary/10 rounded-full blur-xl" />
+        <div className="relative p-4 sm:p-6 rounded-full bg-muted">
+          <Cloud className="w-8 h-8 sm:w-12 sm:h-12 text-primary" />
         </div>
       </div>
-      <h3 className="text-xl font-semibold mb-2">Search for a City</h3>
-      <p className="text-muted-foreground max-w-sm">
-        Enter a city name in the search bar above to see current weather conditions, forecasts, and location on the map.
+      <h3 className="text-lg sm:text-xl font-semibold mb-2">Search for a City</h3>
+      <p className="text-muted-foreground text-sm sm:text-base max-w-sm">
+        Enter a city name to see weather conditions, forecasts, and location on the map.
       </p>
-      <div className="flex items-center gap-2 mt-6 text-sm text-muted-foreground">
-        <MapPin className="w-4 h-4" />
-        <span>Try: London, Tokyo, New York, Paris...</span>
+      <div className="flex items-center gap-2 mt-4 sm:mt-6 text-xs sm:text-sm text-muted-foreground">
+        <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+        <span>Try: London, Tokyo, Paris...</span>
       </div>
     </div>
   );

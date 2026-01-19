@@ -83,7 +83,7 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
   return (
     <div className={`relative w-full max-w-xl ${className}`}>
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
         <Input
           ref={inputRef}
           type="search"
@@ -95,7 +95,7 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
           }}
           onFocus={() => results && results.length > 0 && setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          className="h-12 pl-12 pr-12 text-base rounded-xl border-2 border-transparent bg-muted focus:border-primary focus:bg-background transition-all"
+          className="h-11 sm:h-12 pl-10 sm:pl-12 pr-10 sm:pr-12 text-sm sm:text-base rounded-xl border-2 border-transparent bg-muted focus:border-primary focus:bg-background transition-all"
           data-testid="input-search-city"
         />
         {query && (
@@ -124,7 +124,7 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
             {results.map((city, index) => (
               <li key={city.id}>
                 <button
-                  className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors hover-elevate ${
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 text-left transition-colors hover-elevate ${
                     index === selectedIndex ? "bg-accent" : ""
                   }`}
                   onClick={() => handleSelect(city)}
@@ -132,14 +132,14 @@ export function SearchBar({ onSelectCity, className }: SearchBarProps) {
                 >
                   <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate">{city.name}</p>
-                    <p className="text-sm text-muted-foreground truncate">
+                    <p className="font-medium text-sm sm:text-base truncate">{city.name}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">
                       {city.admin1 ? `${city.admin1}, ` : ""}
                       {city.country}
                     </p>
                   </div>
                   {city.population && (
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-muted-foreground hidden sm:inline">
                       {(city.population / 1000).toFixed(0)}k
                     </span>
                   )}

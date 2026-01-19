@@ -36,92 +36,76 @@ export function ComparePanel({
 
   return (
     <Card className="w-full">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6">
         <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-primary" />
-            <CardTitle className="text-lg font-semibold">Compare Cities</CardTitle>
-            <Badge variant="secondary">{cities.length} cities</Badge>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+            <CardTitle className="text-sm sm:text-lg font-semibold">Compare</CardTitle>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs">{cities.length}</Badge>
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={onClear}
-            className="text-muted-foreground"
+            className="text-muted-foreground h-8 px-2 sm:px-3 text-xs sm:text-sm"
             data-testid="button-clear-compare"
           >
-            <Trash2 className="h-4 w-4 mr-1" />
-            Clear All
+            <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-1" />
+            <span className="hidden sm:inline">Clear All</span>
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-3 sm:px-6">
         <ScrollArea className="w-full whitespace-nowrap">
-          <div className="flex gap-4 pb-2">
+          <div className="flex gap-2 sm:gap-4 pb-2">
             {cities.map((weather) => (
               <div
                 key={weather.city.id}
-                className="relative flex-shrink-0 w-[200px] p-4 rounded-xl bg-muted/50 hover-elevate cursor-pointer"
+                className="relative flex-shrink-0 w-[140px] sm:w-[180px] p-2.5 sm:p-4 rounded-xl bg-muted/50 hover-elevate cursor-pointer"
                 onClick={() => onSelectCity(weather)}
                 data-testid={`compare-city-${weather.city.id}`}
               >
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-1 right-1 h-6 w-6"
+                  className="absolute top-1 right-1 h-5 w-5 sm:h-6 sm:w-6"
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemove(weather.city.id);
                   }}
                   data-testid={`button-remove-compare-${weather.city.id}`}
                 >
-                  <X className="h-3 w-3" />
+                  <X className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 </Button>
 
-                <div className="flex items-center gap-2 mb-3">
-                  <WeatherIcon code={weather.current.weatherCode} className="w-8 h-8 text-primary" />
+                <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <WeatherIcon code={weather.current.weatherCode} className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium truncate">{weather.city.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{weather.city.country}</p>
+                    <p className="font-medium text-xs sm:text-sm truncate">{weather.city.name}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{weather.city.country}</p>
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">Temp</span>
-                    <span className={`font-bold ${getTemperatureColor(weather.current.temperature)}`}>
-                      {Math.round(weather.current.temperature)}°C
-                      {weather.current.temperature === maxTemp && (
-                        <Badge variant="destructive" className="ml-1 text-[10px] px-1 py-0">H</Badge>
-                      )}
-                      {weather.current.temperature === minTemp && (
-                        <Badge variant="secondary" className="ml-1 text-[10px] px-1 py-0">L</Badge>
-                      )}
+                    <span className="text-[10px] sm:text-xs text-muted-foreground">Temp</span>
+                    <span className={`font-bold text-xs sm:text-sm ${getTemperatureColor(weather.current.temperature)}`}>
+                      {Math.round(weather.current.temperature)}°
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">Humidity</span>
-                    <span className="font-medium text-sm">
+                    <span className="text-[10px] sm:text-xs text-muted-foreground">Humidity</span>
+                    <span className="font-medium text-xs sm:text-sm">
                       {weather.current.humidity}%
-                      {weather.current.humidity === maxHumidity && (
-                        <Badge variant="secondary" className="ml-1 text-[10px] px-1 py-0">H</Badge>
-                      )}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">Wind</span>
-                    <span className="font-medium text-sm">
+                    <span className="text-[10px] sm:text-xs text-muted-foreground">Wind</span>
+                    <span className="font-medium text-xs sm:text-sm">
                       {Math.round(weather.current.windSpeed)} km/h
-                      {weather.current.windSpeed === maxWind && (
-                        <Badge variant="secondary" className="ml-1 text-[10px] px-1 py-0">H</Badge>
-                      )}
                     </span>
                   </div>
                 </div>
-
-                <p className="text-xs text-muted-foreground mt-2 truncate">
-                  {getWeatherLabel(weather.current.weatherCode)}
-                </p>
               </div>
             ))}
           </div>
@@ -129,36 +113,22 @@ export function ComparePanel({
         </ScrollArea>
 
         {cities.length >= 2 && (
-          <div className="mt-4 pt-4 border-t">
-            <h4 className="text-sm font-medium mb-3">Quick Stats</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="p-3 rounded-lg bg-muted/30 text-center">
-                <p className="text-xs text-muted-foreground mb-1">Warmest</p>
-                <p className="font-medium truncate">
+          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t">
+            <h4 className="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Quick Stats</h4>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <div className="p-2 sm:p-3 rounded-lg bg-muted/30 text-center">
+                <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Warmest</p>
+                <p className="font-medium text-xs sm:text-sm truncate">
                   {cities.find((c) => c.current.temperature === maxTemp)?.city.name}
                 </p>
-                <p className="text-lg font-bold text-amber-500">{Math.round(maxTemp)}°C</p>
+                <p className="text-sm sm:text-lg font-bold text-amber-500">{Math.round(maxTemp)}°C</p>
               </div>
-              <div className="p-3 rounded-lg bg-muted/30 text-center">
-                <p className="text-xs text-muted-foreground mb-1">Coldest</p>
-                <p className="font-medium truncate">
+              <div className="p-2 sm:p-3 rounded-lg bg-muted/30 text-center">
+                <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Coldest</p>
+                <p className="font-medium text-xs sm:text-sm truncate">
                   {cities.find((c) => c.current.temperature === minTemp)?.city.name}
                 </p>
-                <p className="text-lg font-bold text-blue-500">{Math.round(minTemp)}°C</p>
-              </div>
-              <div className="p-3 rounded-lg bg-muted/30 text-center">
-                <p className="text-xs text-muted-foreground mb-1">Windiest</p>
-                <p className="font-medium truncate">
-                  {cities.find((c) => c.current.windSpeed === maxWind)?.city.name}
-                </p>
-                <p className="text-lg font-bold text-cyan-500">{Math.round(maxWind)} km/h</p>
-              </div>
-              <div className="p-3 rounded-lg bg-muted/30 text-center">
-                <p className="text-xs text-muted-foreground mb-1">Most Humid</p>
-                <p className="font-medium truncate">
-                  {cities.find((c) => c.current.humidity === maxHumidity)?.city.name}
-                </p>
-                <p className="text-lg font-bold text-blue-400">{maxHumidity}%</p>
+                <p className="text-sm sm:text-lg font-bold text-blue-500">{Math.round(minTemp)}°C</p>
               </div>
             </div>
           </div>
