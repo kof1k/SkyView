@@ -23,13 +23,43 @@ export async function apiRequest(
   return res;
 }
 
+function buildUrl(queryKey: readonly unknown[]): string {
+  const [baseUrl, ...params] = queryKey;
+  
+  if (typeof baseUrl !== "string") {
+    throw new Error("First element of queryKey must be a string URL");
+  }
+  
+  // Handle geocoding endpoint
+  if (baseUrl === "/api/geocoding" && params.length > 0) {
+    const query = params[0];
+    if (query && typeof query === "string") {
+      return `${baseUrl}?query=${encodeURIComponent(query)}`;
+    }
+    return baseUrl;
+  }
+  
+  // Handle weather endpoint
+  if (baseUrl === "/api/weather" && params.length >= 2) {
+    const [latitude, longitude] = params;
+    if (latitude !== undefined && longitude !== undefined) {
+      return `${baseUrl}?latitude=${latitude}&longitude=${longitude}`;
+    }
+    return baseUrl;
+  }
+  
+  // Default: just use the base URL
+  return baseUrl;
+}
+
 type UnauthorizedBehavior = "returnNull" | "throw";
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
+    const url = buildUrl(queryKey);
+    const res = await fetch(url, {
       credentials: "include",
     });
 
@@ -47,7 +77,7 @@ export const queryClient = new QueryClient({
       queryFn: getQueryFn({ on401: "throw" }),
       refetchInterval: false,
       refetchOnWindowFocus: false,
-      staleTime: Infinity,
+      staleTime: 60000, // 1 minute for weather data
       retry: false,
     },
     mutations: {
