@@ -1,8 +1,8 @@
-# WeatherMap - Weather & Maps Explorer
+# SkyView - Weather & Maps Explorer
 
 ## Overview
 
-WeatherMap is a full-stack weather application that combines real-time weather data with interactive maps. Users can search for cities worldwide, view current weather conditions and forecasts, and compare weather across multiple locations. The application integrates Open-Meteo for weather data and OpenStreetMap/Leaflet for interactive mapping.
+SkyView is a full-stack weather application that combines real-time weather data with interactive maps. Users can search for cities worldwide, view current weather conditions and forecasts, and compare weather across multiple locations. The application integrates Open-Meteo for weather data and OpenStreetMap/Leaflet for interactive mapping.
 
 ## User Preferences
 

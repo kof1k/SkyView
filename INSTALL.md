@@ -1,4 +1,4 @@
-# Інструкція по встановленню WeatherMap на Ubuntu Server
+# Інструкція по встановленню SkyView на Ubuntu Server
 
 ## Вимоги
 
@@ -40,11 +40,11 @@ sudo apt install -y git
 
 ```bash
 # Створення директорії для додатку
-sudo mkdir -p /var/www/weathermap
-sudo chown $USER:$USER /var/www/weathermap
+sudo mkdir -p /var/www/skyview
+sudo chown $USER:$USER /var/www/skyview
 
 # Клонування репозиторію (замініть URL на ваш)
-cd /var/www/weathermap
+cd /var/www/skyview
 git clone <URL_ВАШОГО_РЕПОЗИТОРІЮ> .
 
 # Або скопіюйте файли вручну
@@ -53,7 +53,7 @@ git clone <URL_ВАШОГО_РЕПОЗИТОРІЮ> .
 ## Крок 5: Встановлення залежностей
 
 ```bash
-cd /var/www/weathermap
+cd /var/www/skyview
 npm install
 ```
 
@@ -91,7 +91,7 @@ npm start
 sudo npm install -g pm2
 
 # Запуск додатку
-pm2 start dist/index.cjs --name weathermap
+pm2 start dist/index.cjs --name skyview
 
 # Автозапуск при перезавантаженні сервера
 pm2 startup
@@ -99,9 +99,9 @@ pm2 save
 
 # Корисні команди PM2
 pm2 status          # Статус додатків
-pm2 logs weathermap # Логи
-pm2 restart weathermap # Перезапуск
-pm2 stop weathermap    # Зупинка
+pm2 logs skyview    # Логи
+pm2 restart skyview # Перезапуск
+pm2 stop skyview    # Зупинка
 ```
 
 ## Крок 9: Налаштування Nginx (опціонально)
@@ -111,7 +111,7 @@ pm2 stop weathermap    # Зупинка
 sudo apt install -y nginx
 
 # Створення конфігурації
-sudo nano /etc/nginx/sites-available/weathermap
+sudo nano /etc/nginx/sites-available/skyview
 ```
 
 Вміст конфігурації:
@@ -137,7 +137,7 @@ server {
 Активація конфігурації:
 ```bash
 # Створення символічного посилання
-sudo ln -s /etc/nginx/sites-available/weathermap /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/skyview /etc/nginx/sites-enabled/
 
 # Перевірка конфігурації
 sudo nginx -t
@@ -178,11 +178,11 @@ sudo ufw enable
 ## Оновлення додатку
 
 ```bash
-cd /var/www/weathermap
+cd /var/www/skyview
 git pull
 npm install
 npm run build
-pm2 restart weathermap
+pm2 restart skyview
 ```
 
 ## Вирішення проблем
@@ -198,12 +198,12 @@ PORT=3000
 
 ### Помилки дозволів
 ```bash
-sudo chown -R $USER:$USER /var/www/weathermap
+sudo chown -R $USER:$USER /var/www/skyview
 ```
 
 ### Перевірка логів
 ```bash
-pm2 logs weathermap --lines 100
+pm2 logs skyview --lines 100
 ```
 
 ---
@@ -218,18 +218,18 @@ sudo apt install -y nodejs git nginx
 sudo npm install -g pm2
 
 # Клонування та збірка
-sudo mkdir -p /var/www/weathermap
-sudo chown $USER:$USER /var/www/weathermap
-cd /var/www/weathermap
+sudo mkdir -p /var/www/skyview
+sudo chown $USER:$USER /var/www/skyview
+cd /var/www/skyview
 git clone <URL_РЕПОЗИТОРІЮ> .
 npm install
 npm run build
 
 # Запуск
-pm2 start dist/index.cjs --name weathermap
+pm2 start dist/index.cjs --name skyview
 pm2 startup
 pm2 save
 
-echo "WeatherMap успішно встановлено!"
+echo "SkyView успішно встановлено!"
 echo "Відкрийте http://$(hostname -I | awk '{print $1}'):5000"
 ```

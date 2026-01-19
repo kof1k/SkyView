@@ -1,6 +1,7 @@
-import { MapPin, Sun, Moon, Globe } from "lucide-react";
+import { MapPin, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
+import logoImage from "@assets/generated_images/skyview_weather_app_logo.png";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -9,11 +10,13 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between gap-4 px-4 md:px-6">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground">
-            <Globe className="w-5 h-5" />
-          </div>
+          <img 
+            src={logoImage} 
+            alt="SkyView Logo" 
+            className="w-10 h-10 rounded-lg object-cover"
+          />
           <div className="flex flex-col">
-            <h1 className="text-lg font-semibold tracking-tight">WeatherMap</h1>
+            <h1 className="text-lg font-semibold tracking-tight">SkyView</h1>
             <p className="text-xs text-muted-foreground hidden sm:block">Weather + Maps Explorer</p>
           </div>
         </div>
