@@ -49,6 +49,25 @@ function MapController({ center, zoom }: { center: [number, number]; zoom: numbe
   useEffect(() => {
     map.flyTo(center, zoom, { duration: 1 });
   }, [center, zoom, map]);
+
+  useEffect(() => {
+    map.scrollWheelZoom.disable();
+    
+    const enableScroll = () => map.scrollWheelZoom.enable();
+    const disableScroll = () => map.scrollWheelZoom.disable();
+    
+    map.on('focus', enableScroll);
+    map.on('click', enableScroll);
+    map.on('blur', disableScroll);
+    map.on('mouseout', disableScroll);
+    
+    return () => {
+      map.off('focus', enableScroll);
+      map.off('click', enableScroll);
+      map.off('blur', disableScroll);
+      map.off('mouseout', disableScroll);
+    };
+  }, [map]);
   
   return null;
 }
@@ -83,7 +102,7 @@ export function InteractiveMap({
         zoom={zoom}
         className="h-full w-full"
         style={{ minHeight: "400px" }}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         data-testid="interactive-map"
       >
         <MapController center={center} zoom={zoom} />
