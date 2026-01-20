@@ -132,7 +132,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="lg:sticky lg:top-24 h-fit order-2 lg:order-2">
+            <div className="h-fit order-2 lg:order-2">
               <Suspense fallback={<MapSkeleton />}>
                 <InteractiveMap
                   markers={mapMarkers}
