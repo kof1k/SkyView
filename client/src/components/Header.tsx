@@ -22,10 +22,6 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-sm">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Open-Meteo + OpenStreetMap</span>
-          </div>
           <Button
             variant="ghost"
             size="icon"
@@ -37,6 +33,10 @@ export function Header() {
             <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-sm">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Open-Meteo + OpenStreetMap</span>
+          </div>
         </div>
       </div>
     </header>
