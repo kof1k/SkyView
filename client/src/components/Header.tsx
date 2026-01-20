@@ -1,7 +1,7 @@
 import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
-import logoImage from "@assets/generated_images/skyview_weather_app_logo.png";
+import logoImage from "../img/logo.png";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
