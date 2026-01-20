@@ -36,15 +36,14 @@ export function WeatherCard({
   return (
     <Card className={`relative overflow-hidden ${isMain ? "border-primary" : ""}`}>
       {onClose && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-2 right-2 h-8 w-8 z-10"
+        <button
+          type="button"
+          className="absolute top-3 right-3 p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors z-10"
           onClick={onClose}
           data-testid="button-close-weather-card"
         >
           <X className="h-4 w-4" />
-        </Button>
+        </button>
       )}
 
       <CardHeader className="pb-2">
