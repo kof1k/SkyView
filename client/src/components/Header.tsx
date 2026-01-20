@@ -17,15 +17,10 @@ export function Header() {
           />
           <div className="flex flex-col">
             <h1 className="text-lg font-semibold tracking-tight">SkyView</h1>
-            <p className="text-xs text-muted-foreground hidden sm:block">Weather + Maps Explorer</p>
+            
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-muted text-muted-foreground text-sm">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Open-Meteo + OpenStreetMap</span>
-          </div>
           <Button
             variant="ghost"
             size="icon"
@@ -38,7 +33,6 @@ export function Header() {
             <span className="sr-only">Toggle theme</span>
           </Button>
         </div>
-      </div>
     </header>
   );
 }
