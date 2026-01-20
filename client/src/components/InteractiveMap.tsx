@@ -95,7 +95,7 @@ export function InteractiveMap({
     : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
   return (
-    <div className={`relative rounded-xl overflow-hidden border ${className}`}>
+    <div className={`relative rounded-xl overflow-hidden border z-0 ${className}`}>
       <MapContainer
         ref={mapRef}
         center={center}
